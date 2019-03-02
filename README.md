@@ -4,7 +4,7 @@
 
 #### The Dataset
 -	The dataset we will be working with is the _International Union for Conservation of Nature’s Red List of Threatened Species_. This dataset provides comprehensive data on **animal**, **fungi**, and **plant** species _globally_. Specifically, one can find information regarding population size, habitat, ecology, threats, and conservation actions for these different species.
--	Data for the IUCN Red List is collected by members of the _Red List Partnership_. These partners include the _Species Survival Commission, BirdLife International, Conservation International,_ and others. A complete list of these partners can be found [Here](https://www.iucnredlist.org/about/partners)
+-	Data for the IUCN Red List is collected by members of the _Red List Partnership_. These partners include the _Species Survival Commission, BirdLife International, Conservation International,_ and others. A complete list of these partners can be found [here.](https://www.iucnredlist.org/about/partners)
 -	There are more than 96,500 species in this dataset. As a result, the IUCN Red List is a product of the participation of its partners- it would be impossible to collect this much data without them.
 
 #### Target Audience
