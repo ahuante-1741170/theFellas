@@ -24,4 +24,9 @@ body_info <- content(response, "text")
 parsed_data_info <- fromJSON(body_info)
 
 # Data frame for Orca Whale details
-data_set_info <- as.data.frame(parsed_data_count)
+data_set_info <- as.data.frame(parsed_data_info)
+
+
+
+
+
