@@ -6,6 +6,7 @@ library(ggmap)
 library(ggplot2)
 library(leaflet)
 library(htmltools)
+library(jsonlite)
 
 # Bike incidents 
 
@@ -39,17 +40,7 @@ bikes_df_locations$long <- as.numeric(bikes_df_locations$long)
 
 bikes <- cbind.data.frame(bikes_df, bikes_df_locations)
 
-# Leaflet plot 
+# Flatten the data (there are nested data frames)
 
-
-incidents_map <-
-  leaflet(data = bikes) %>%
-  addTiles() %>%
-  addCircles(
-    lng = ~long,
-    lat = ~lat,
-    label = ~htmlEscape(incidents.title),
-    stroke = T
-  )
-
+bikes <- flatten(bikes)
 
