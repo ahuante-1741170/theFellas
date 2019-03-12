@@ -1,4 +1,4 @@
-# Gather any data that has relating effets on orca whales
+# Gather data on threats about Orca Whales
 
 library(dplyr)
 library(httr)
