@@ -78,8 +78,8 @@ server <- function(input, output, session) {
     # Specifying popup content for the map
     label <- paste("<h4>", "Incident Title:",bikes$incidents.title, "</h4>",
                    "<h5>", "Incident Type:",bikes$incidents.type, "</h5>",
-                   "<p> You can find an image of the bike <a href =", bikes$incidents.media.image_url, ">",
-                   "here","</a> <p>")
+                   "<p> You can find an image of the incident <a href =", bikes$incidents.media.image_url, ">",
+                   "here!","</a> <p>")
     
     # Now the actual map 
     incidents_map <-
