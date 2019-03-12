@@ -79,9 +79,16 @@ library(leaflet)
 
 
 ui <- fluidPage(
-  leafletOutput("mymap"),
+  titlePanel("Map of Bike Incidents"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("text", label = h3("Location Input (city, zip code"), value = "Enter text...")
+      )
+    ),
+  mainpanel(leafletOutput("mymap")),
   p()
 )
+
 
 server <- function(input, output, session) {
   
