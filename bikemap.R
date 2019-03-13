@@ -8,6 +8,7 @@ library(leaflet)
 library(htmltools)
 library(jsonlite)
 library(shiny)
+library(stringr)
 
 # Shiny 
 
@@ -29,7 +30,11 @@ ui <- fluidPage(
         selected = "Seattle"
       )
     ),
-    mainPanel(leafletOutput("mymap"))
+    mainPanel(leafletOutput("mymap"),
+      tabsetPanel(type = "tabs",
+        tabPanel("Incidents", plotOutput("incidents_color"))            
+      )
+    )
   )
 )
 
@@ -99,7 +104,35 @@ server <- function(input, output, session) {
         stroke = T
       )
   })
-}
+  
+  # Generates a plot for corelation between color of bike and how often it gets stolen
+  output$incidents_color <- renderLeaflet({
+    # Bike theft based on color
+
+    base_url_color <- "https://bikeindex.org:443/api/v3/"
+    endpoints_color <- paste0("search?page=1&per_page=100&location=IP&distance=10&stolenness=stolen")
+    bike_api_url_color <- paste0(base_url_color, endpoints_color)
+    response_color <- GET(bike_api_url_color)
+    body_color <- content(response_color, "text")
+    parsed_data_color <- fromJSON(body_color)
+    bikes_df_color <- as.data.frame(parsed_data_color)
+    
+    # Wrangles data of bikes stolen by manufacture
+    manufacture_raw <- bikes_df_color %>% select(bikes.manufacturer_name)
+    manufacture_filter <- manufacture_raw %>% distinct(bikes.manufacturer_name) %>% 
+      mutate(str_count(bikes.manufacturer_name))
+    manufacture_final <- manufacture_filter %>% rename(
+        Manufactures = bikes.manufacturer_name,
+        Stolen = `str_count(bikes.manufacturer_name)`
+      )
+    
+    # Creates bar chart
+    stolen_map <- ggplot(data = manufacture_final) +
+      geom_col(mapping = aes(x = Manufactures, y = Stolen)
+    )
+    
+  })
+}  
 
 shinyApp(ui, server)
 
