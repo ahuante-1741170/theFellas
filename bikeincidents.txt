@@ -1,4 +1,3 @@
-
 # Here is the api version 3 (most current verion)
 # With different endpoints you can get good information regarding the year, make, model, ect.
   # this would be good for charts
