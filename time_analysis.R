@@ -5,7 +5,7 @@ library(jsonlite)
 library(ggplot2)
 library(anytime)
 
-# Bike incidents 
+# Bike incidents
 
 get_city_data <- function(request) {
   response <- GET(request)
@@ -19,7 +19,8 @@ make_dates <- function(df, timezone) {
   to_return$time <- format(to_return$time, tz = paste0("America/", timezone))
   to_return$time <- strptime(to_return$time, format = "%Y-%m-%d %H:%M")
   to_return$time <- format(round(to_return$time, units = "hours"),
-                           format = "%H:%M")
+    format = "%H:%M"
+  )
   to_return <- to_return %>%
     group_by(time) %>%
     summarize(count = n())
@@ -28,12 +29,18 @@ make_dates <- function(df, timezone) {
 
 build_plot <- function(df) {
   plot <- ggplot(df, aes(x = time)) +
-    geom_col(aes(y = (count)/sum(count)), fill = "#ffb638") +
-    scale_x_discrete(name = "Time of Day",
-      limits = c(paste0("0", as.character(0:9), ":00"),
-                 paste0(as.character(10:23), ":00")),
-      labels = c(paste0("0", as.character(0:9), ":00"),
-                 paste0(as.character(10:23), ":00"))) +
+    geom_col(aes(y = (count) / sum(count)), fill = "#ffb638") +
+    scale_x_discrete(
+      name = "Time of Day",
+      limits = c(
+        paste0("0", as.character(0:9), ":00"),
+        paste0(as.character(10:23), ":00")
+      ),
+      labels = c(
+        paste0("0", as.character(0:9), ":00"),
+        paste0(as.character(10:23), ":00")
+      )
+    ) +
     theme_bw() +
     labs(
       title = "Percentage of Bikes Stolen vs. Time of Day",

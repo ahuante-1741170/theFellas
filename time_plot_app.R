@@ -27,7 +27,6 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-  
   data <- reactive({
     split <- strsplit(input$city_choice, " ")
     request <- paste0(
@@ -36,7 +35,7 @@ server <- function(input, output) {
     )
     make_dates(get_city_data(request), split[[1]][2])
   })
-  
+
   output$time_plot <- renderPlot({
     plot <- build_plot(data())
     plot
