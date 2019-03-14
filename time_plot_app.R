@@ -5,10 +5,10 @@ library("dplyr")
 source("time_analysis.R")
 
 ui <- fluidPage(
-  titlePanel("At What Time are Most Bikes Stolen?"),
+  titlePanel("At What Time Are Most Bikes Stolen?"),
   radioButtons(
     "city_choice",
-    label = "Choose a city:",
+    label = "Choose a city to plot:",
     choices = list(
       "Seattle" = "Seattle Los_Angeles",
       "Los Angeles" = "Los%20Angeles Los_Angeles",
