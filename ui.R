@@ -12,7 +12,7 @@ library(stringr)
 library(anytime)
 
 shinyUI(navbarPage(
-  "Stolen Bikes Across the US",
+  "Bike Incidents Across the US",
   tabPanel(
     "Incident Map",
     titlePanel("Locations of Bike Incidents in Major Cities"),
@@ -65,8 +65,28 @@ shinyUI(navbarPage(
   ),
   
   tabPanel(
-    "Incident Plot",
-    titlePanel("Incident Color Plot"),
-    mainPanel(plotOutput("incidents_color"))
+    "Manufacturer Plot",
+    titlePanel("Incident Manufacturer Plot"),
+    sidebarLayout(
+      sidebarPanel(
+        radioButtons(
+          "city",
+          label = "Choose a city to plot:",
+          choices = list(
+            "Seattle" = "Seattle",
+            "Los Angeles" = "Los%20Angeles",
+            "San Francisco" = "San%20Francisco",
+            "Phoenix" = "Phoenix",
+            "Houston" = "Houston",
+            "Chicago" = "Chicago",
+            "New York" = "New%20York",
+            "Boston" = "Boston"
+          )
+        )
+      ),
+      mainPanel(
+        plotOutput("incidents_manufacturer")
+      )
+    )
   ) # Closes tabpanel ()
 ))
