@@ -12,7 +12,7 @@ library(stringr)
 library(anytime)
 
 shinyUI(navbarPage(
-  "Stolen Bikes Across the US",
+  "Bike Incidents Across the US",
   tabPanel(
     "Incident Map",
     titlePanel("Locations of Bike Incidents in Major Cities"),
