@@ -12,8 +12,10 @@ library(stringr)
 
 # Shiny 
 
-ui <- fluidPage(
-  titlePanel("Stolen Bike Locations in Major Cities"),
+ui <- shinyUI(
+  navbarPage(
+  tabPanel("Incident Map",
+  titlePanel("Locations of Bike Incidents in Major Cities"),
   sidebarLayout(
     sidebarPanel(
       
@@ -29,18 +31,26 @@ ui <- fluidPage(
         ),
         selected = "Seattle"
       )
-    ),
-    mainPanel(leafletOutput("mymap"),
-      tabsetPanel(type = "tabs",
-        tabPanel("Incidents", plotOutput("incidents_color"))            
-      )
-    )
-  )
-)
+    ), #Closes sidebarpanel ()
+    mainPanel(leafletOutput("incidentsmap")
+      ) # Closes mainPanel ()
+    ) # Closes sidebarlayout() function 
+  ), # Closes Tab Panel
+  
+# Incident Color Plot Tab
+
+tabPanel("Incident Plot",
+         
+    titlePanel("Incident Color Plot"),
+      mainPanel(plotOutput("incidents_color"))
+    ) # Closes tabpanel ()
+  ) # Closes navbarpage ()    
+) # Closes fluidpage ()
+
 
 server <- function(input, output, session) {
   
-  output$mymap <- renderLeaflet({
+  output$incidentsmap <- renderLeaflet({
     # Bike incidents 
     
     base_url <- "https://bikewise.org/api/v2/"
