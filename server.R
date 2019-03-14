@@ -128,8 +128,12 @@ server <- function(input, output) {
     
     # Creates bar chart
     stolen_map <- ggplot(data = manufacture_final) +
-      geom_col(mapping = aes(x = Manufactures, y = Stolen))
-    stolen_map
+      geom_col(mapping = aes(x = Manufactures, y = Stolen)) +
+      labs(
+        x = "Manufacturer / type",
+        y = "% of Stolen"
+      )
+    stolen_map + theme(axis.text.x = element_text(angle = -90, hjust = 0))
     
   })
 }
