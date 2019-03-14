@@ -106,11 +106,12 @@ server <- function(input, output) {
   })
   
   # Generates a plot for corelation between color of bike and how often it gets stolen
-  output$incidents_color <- renderPlot({
+  output$incidents_manufacturer <- renderPlot({
     # Bike theft based on color
     
     base_url_color <- "https://bikeindex.org:443/api/v3/"
-    endpoints_color <- paste0("search?page=1&per_page=100&location=IP&distance=10&stolenness=stolen")
+    endpoints_color <- paste0("search?page=1&per_page=100&location=",
+                              input$city, "&distance=10&stolenness=proximity")
     bike_api_url_color <- paste0(base_url_color, endpoints_color)
     response_color <- GET(bike_api_url_color)
     body_color <- content(response_color, "text")
@@ -130,6 +131,7 @@ server <- function(input, output) {
     stolen_map <- ggplot(data = manufacture_final) +
       geom_col(mapping = aes(x = Manufactures, y = Stolen)) +
       labs(
+        title = "Number of Bikes Stolen vs. Manufacturer",
         x = "Manufacturer / type",
         y = "% of Stolen"
       )
