@@ -11,7 +11,8 @@ library(shiny)
 library(stringr)
 library(anytime)
 
-shinyUI(navbarPage(
+shinyUI(
+  navbarPage(
   "Bike Incidents Across the US",
   tabPanel(
     "Incident Map",
@@ -33,7 +34,9 @@ shinyUI(navbarPage(
         )
       ), #Closes sidebarpanel ()
       mainPanel(
-        leafletOutput("incidentsmap")
+        leafletOutput("incidentsmap"), 
+        p("Try clicking on the points for a description of each incident!",  
+          style = "font-weight: 500; line-height: 5; font-size: 20px;")
       ) # Closes mainPanel ()
     ) # Closes sidebarlayout() function 
   ),
@@ -59,7 +62,11 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        plotOutput("time_plot")
+        plotOutput("time_plot"),
+        p("This plot shows the percentage of bikes stolen at each hour of the day. It gives the user an idea of what 
+          time of day to be most cautious during when leaving their bike unattended. Please not that the times are in 
+          military time.",  
+          style = "font-weight: 500; line-height: 1; font-size: 20px;")
       )
     )
   ),
@@ -85,7 +92,10 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        plotOutput("incidents_manufacturer")
+        plotOutput("incidents_manufacturer"), 
+        p("This plot shows the top brand(s) of bikes that are stolen. Interestingly, in different locations, 
+          brand of bike stolen varies widely.",  
+          style = "font-weight: 500; line-height: 1; font-size: 20px;")
       )
     )
   ) # Closes tabpanel ()
