@@ -60,6 +60,9 @@ server <- function(input, output) {
                    "<p> You can find an image of the incident <a href =", bikes$incidents.media.image_url, ">",
                    "here!","</a> <p>")
     
+    # Specify Color Pallete 
+    palette <- colorFactor(palette = c("#ff0000","#0066ff", "#9966ff"), sort(bikes$incidents.type))
+    
     # Now the actual map 
     incidents_map <-
       leaflet(data = bikes) %>%
@@ -74,9 +77,18 @@ server <- function(input, output) {
           "box-shadow" = "3px 3px rgba(0,0,0,0.25)",
           "font-size" = "15px",
           "border-color" = "rgba(0,0,0,0.5)"
-        )),
+        )
+        ),
+        color = ~palette(bikes$incidents.type),
         stroke = T
-      ) 
+      ) %>%
+      addLegend(
+        position = "bottomright",
+        title = "Type of Incident",
+        pal = palette, # the palette to label
+        values = ~bikes$incidents.type, # the values to label
+        opacity = 1
+      )
   })
   
   # Generates plot for correlation between time of day and number of bikes stolen
