@@ -76,7 +76,7 @@ server <- function(input, output) {
           "border-color" = "rgba(0,0,0,0.5)"
         )),
         stroke = T
-      )
+      ) 
   })
   
   # Generates plot for correlation between time of day and number of bikes stolen
