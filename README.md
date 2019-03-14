@@ -24,4 +24,4 @@ We will be reading in our data through an **API**, which will require the httr a
 
 In working with such a large dataset, a potential challenge that presents itself will be sifting through the data  to find meaningful _trends_ and _interpretations_ that we would like to present to our audience in our final project. Additionally, since working with Shiny is a relatively new skill for us, we may encounter hurdles simply due to unfamiliarity.
 
-[Final Project: Bike Incidences Across the US](https://ahuante-1741170.shinyapps.io/theFellas)
+[Final Project: Bike Incidences Across the US](https://logeng.shinyapps.io/theFellas/)
