@@ -27,15 +27,16 @@ make_dates <- function(df, timezone) {
 }
 
 build_plot <- function(df) {
-  plot <- ggplot(df) +
-    geom_col(aes(x = time, y = count), fill = "#ffb638") +
+  plot <- ggplot(df, aes(x = time)) +
+    geom_col(aes(y = (count)/sum(count)), fill = "#ffb638") +
     scale_x_discrete(name = "Time of Day",
       limits = c(paste0("0", as.character(0:9), ":00"),
                  paste0(as.character(10:23), ":00")),
       labels = c(paste0("0", as.character(0:9), ":00"),
                  paste0(as.character(10:23), ":00"))) +
+    theme_bw() +
     labs(
-      title = "Number of Bikes Stolen vs. Time of Day",
-      y = "Number of Bikes Stolen"
+      title = "Percentage of Bikes Stolen vs. Time of Day",
+      y = "Percentage of Bikes Stolen"
     )
 }

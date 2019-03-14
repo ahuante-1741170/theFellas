@@ -1,6 +1,9 @@
-library("shiny")
-library("ggplot2")
-library("dplyr")
+library(tidyr)
+library(dplyr)
+library(httr)
+library(jsonlite)
+library(ggplot2)
+library(anytime)
 
 source("time_analysis.R")
 
@@ -24,6 +27,7 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
+  
   data <- reactive({
     split <- strsplit(input$city_choice, " ")
     request <- paste0(
@@ -32,6 +36,7 @@ server <- function(input, output) {
     )
     make_dates(get_city_data(request), split[[1]][2])
   })
+  
   output$time_plot <- renderPlot({
     plot <- build_plot(data())
     plot
