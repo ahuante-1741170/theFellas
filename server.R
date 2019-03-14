@@ -94,7 +94,7 @@ server <- function(input, output) {
   })
   
   # Generates a plot for corelation between color of bike and how often it gets stolen
-  output$incidents_color <- renderLeaflet({
+  output$incidents_color <- renderPlot({
     # Bike theft based on color
     
     base_url_color <- "https://bikeindex.org:443/api/v3/"
@@ -116,8 +116,8 @@ server <- function(input, output) {
     
     # Creates bar chart
     stolen_map <- ggplot(data = manufacture_final) +
-      geom_col(mapping = aes(x = Manufactures, y = Stolen)
-      )
+      geom_col(mapping = aes(x = Manufactures, y = Stolen))
+    stolen_map
     
   })
 }
