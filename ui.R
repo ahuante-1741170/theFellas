@@ -13,7 +13,8 @@ library(anytime)
 library(shinythemes)
 
 shinyUI(
-  fluidPage(theme = shinytheme("sandstone"),
+  fluidPage(
+    theme = shinytheme("sandstone"),
     navbarPage(
       "Bike Incidents Across the US",
       tabPanel(
@@ -26,11 +27,13 @@ shinyUI(
           This particular dataset has a somewhat loose definition for bikes, 
           although they tend to be non-motorized and powered by physical movement. 
           This project specifically examines and answers questions about bike theft in the US.",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
         p("There are more than 221,000 registered bikes in this dataset. 
           Evidently, the Bike Index is a product of the participation of its users 
           - it would be impossible to collect this much data without them.",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
         h3("Target Audience"),
         p("Our target audience members consist of bike owners and enthusiasts. 
           Since bike theft is a common problem in many cities, 
@@ -39,23 +42,32 @@ shinyUI(
           Through education with this dataset,
           we hope that people gain a better understanding of the prevalence of bike theft 
           and learn how they can counteract or avoid such incidences from happening to themselves.",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
         h3("3 Questions this project will answer"),
         p("1. How are theft locations distributed in the major US cities?",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
-        p("2. When do most of these crimes occur during the day?",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
+        p("2. When do most of thefts occur(time of day)?",
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
         p("3. Is there any correlation between the brand of a bike and theft rate?",
-          style = "font-weight: 100; line-height: 2; font-size: 15px;"),
-        p("Here is the link", a(href= "https://bikeindex.org/documentation/api_v3#!/bikes/GET_version_bikes_id_format_get_0", "Bike Index"),"!")
+          style = "font-weight: 100; line-height: 2; font-size: 15px;"
+        ),
+        h3("Can I access this data?"),
+        p("You can find the data", a(href = "https://bikeindex.org/documentation/api_v3#!/bikes/GET_version_bikes_id_format_get_0", "Here")),
+      h3("Project Contributors"),
+      p("Logen Gendron, Alejandro Huante, Josh Shin, and Kyle Wang",
+        style = "font-weight: 100; line-height: 2; font-size: 15px;"
+      )
       ),
-      
+
       tabPanel(
         "Incident Map",
         titlePanel("Locations of Bike Incidents in Major Cities"),
         sidebarLayout(
           sidebarPanel(
-  
+
             # Input: Selector for location
             selectInput(
               "location",
@@ -72,12 +84,17 @@ shinyUI(
           mainPanel(
             leafletOutput("incidentsmap"),
             p("Try clicking on the points for a description of each incident!",
-              style = "font-weight: 100; line-height: 5; font-size: 20px;"
+              style = "font-weight: 100; line-height: 1.25; font-size: 20px;"
+            ),
+            p("This interactive map displays how bike incidents are distributed throughout major U.S. cities. 
+              Perhaps unsurprisingly, highly urbanized community centers typically have the most bike thefts
+              and hazards.",
+              style = "font-weight: 100; line-height: 1.25; font-size: 20px;"
             )
           ) # Closes mainPanel ()
         ) # Closes sidebarlayout() function
       ),
-  
+
       tabPanel(
         "Time of Day Plot",
         titlePanel("At What Time Are Most Bikes Stolen?"),
@@ -101,18 +118,21 @@ shinyUI(
           mainPanel(
             plotOutput("time_plot"),
             p("This plot shows the percentage of bikes stolen at each hour of the
-              day. It gives the user an idea of what time of day to be most
-              cautious during when leaving their bike unattended. Please not that
-              the times are in military time.",
-              style = "font-weight: 100; line-height: 1; font-size: 20px;"
+              day in different locations. It gives the user an idea of what time of day to be most
+              cautious during when leaving their bike unattended.",
+              style = "font-weight: 100; line-height: 1.25; font-size: 20px;"
+            ),
+            p("Please note that these times are in military time, and that the authors of this project do not 
+              condone leaving your bike unattended at any time during the day.",
+              style = "font-weight: 100; line-height: 1.25; font-size: 20px;"
             )
           )
         )
       ),
-  
+
       tabPanel(
         "Manufacturer Plot",
-        titlePanel("Incident Manufacturer Plot"),
+        titlePanel("Number of Thefts vs. Bike Manufacturer"),
         sidebarLayout(
           sidebarPanel(
             radioButtons(
@@ -132,10 +152,10 @@ shinyUI(
           ),
           mainPanel(
             plotOutput("incidents_manufacturer"),
-            p("This plot shows the top brand(s) of bikes that are stolen.
-              Interestingly, in different locations, brand of bike stolen varies
-              widely.",
-              style = "font-weight: 100; line-height: 1; font-size: 20px;"
+            p("This plot shows the top brand(s) of bikes that are stolen. Through this visualization, we can see
+            that at different locations, the brand of bike stolen varies widely. Therefore, there does not appear to 
+            be a correlation between brand of bike and theft rate.",
+              style = "font-weight: 100; line-height: 1.25; font-size: 20px;"
             )
           )
         )

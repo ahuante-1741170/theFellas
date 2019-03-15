@@ -1,0 +1,12 @@
+name: theFellas
+title: theFellas
+username:
+account: logeng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 791194
+bundleId: 1941329
+url: https://logeng.shinyapps.io/theFellas/
+when: 1552619954.89235
+asMultiple: FALSE
+asStatic: FALSE

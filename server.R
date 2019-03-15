@@ -10,7 +10,7 @@ library(jsonlite)
 library(shiny)
 library(stringr)
 library(anytime)
-library(shinythemes)
+library(shiny)
 
 source("time_analysis.R")
 
@@ -140,13 +140,20 @@ server <- function(input, output) {
     )
 
     # Creates bar chart
-    stolen_map <- ggplot(data = manufacture_final) +
-      geom_col(mapping = aes(x = Manufactures, y = Stolen)) +
-      labs(
-        title = "Number of Bikes Stolen vs. Manufacturer",
-        x = "Manufacturer / type",
-        y = "% of Stolen"
-      )
-    stolen_map + theme(axis.text.x = element_text(angle = -90, hjust = 0))
+    
+    ggplot(manufacture_final, aes(x= Manufactures, y= Stolen)) + 
+      theme_bw() +
+      geom_point(size=3) + 
+      geom_segment(aes(x= Manufactures, 
+                       xend= Manufactures, 
+                       y=0, 
+                       yend= Stolen)) + 
+      labs(title="Number of Bikes Stolen vs. Manufacturer", 
+           caption="source: bikeindex.org", 
+           x = "Manufacturer / Brand", 
+           y = "Percentage of Bikes Stolen") + 
+      theme(axis.text.x = element_text(angle= -90, vjust=0.6))
+    
+
   })
 }
